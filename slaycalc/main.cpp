@@ -2,110 +2,95 @@
 #include <cmath>
 using namespace std;
 
-int addition(int a, int b) 
+const double PI = 3.1415928;
+int addition(int a, int b)
 {
 	return a + b;
 }
-int subtraktion(int a, int b) 
+int subtraktion(int a, int b)
 {
 	return a - b;
 }
-int multiplikation(int a, int b) 
+int multiplikation(int a, int b)
 {
 	return a * b;
 }
-int division(int a, int b) 
+int division(int a, int b)
 {
 	return a / b;
+}
+void trigometrie(double a)
+{
+
+	// Umwandlung von Grad in Bogenmaﬂ
+	double bogenmass = (a * PI) / 180.0;
+
+	double sinus = floorf(100 * sin(bogenmass)) / 100;
+	double kosinus = floorf(100 * cos(bogenmass)) / 100;
+	double tangens = floorf(100 * tan(bogenmass)) / 100;
+
+	double asinus = floorf(100 * asin(sin(bogenmass))) / 100;
+	double akosinus = floorf(100 * acos(cos(bogenmass))) / 100;
+	double atangens = floorf(100 * atan(tan(bogenmass))) / 100;
+
+	cout << "Sinus: " << sinus << endl;
+	cout << "Kosinus: " << kosinus << endl;
+	if (fmod (a,90) == 0)
+	{
+		cout << "Tangens: " << "nicht definiert" << endl;
+	}else
+	cout << "Tangens: " << tangens << endl;
+
+	cout << "aSinus: " << asinus << endl;
+	cout << "aKosinus: " << akosinus << endl;
+	cout << "aTangens: " << atangens << endl;
 }
 void solveQ(double a, double b, double c)
 {
 	double discriminant = b * b - 4 * a * c;
 
 	if (discriminant > 0) {
-		double root1 = (-b + std::sqrt(discriminant)) / (2 * a);
-		double root2 = (-b - std::sqrt(discriminant)) / (2 * a);
-		std::cout << "Die quadratische Gleichung hat zwei reelle Lˆsungen:" << std::endl;
-		std::cout << "x1 = " << root1 << std::endl;
-		std::cout << "x2 = " << root2 << std::endl;
+		double root1 = (-b + sqrt(discriminant)) / (2 * a);
+		double root2 = (-b - sqrt(discriminant)) / (2 * a);
+		cout << "Die quadratische Gleichung hat zwei reelle Lˆsungen:" << endl;
+		cout << "x1 = " << root1 << endl;
+		cout << "x2 = " << root2 << endl;
 	}
 	else if (discriminant == 0) {
 		double root = -b / (2 * a);
-		std::cout << "Die quadratische Gleichung hat eine doppelte reelle Lˆsung:" << std::endl;
-		std::cout << "x = " << root << std::endl;
+		std::cout << "Die quadratische Gleichung hat eine doppelte reelle Lˆsung:" << endl;
+		std::cout << "x = " << root << endl;
 	}
 	else {
 		double realPart = -b / (2 * a);
-		double imaginaryPart = std::sqrt(-discriminant) / (2 * a);
-		std::cout << "Die quadratische Gleichung hat zwei komplexe Lˆsungen:" << std::endl;
-		std::cout << "x1 = " << realPart << " + " << imaginaryPart << "i" << std::endl;
-		std::cout << "x2 = " << realPart << " - " << imaginaryPart << "i" << std::endl;
+		double imaginaryPart = sqrt(-discriminant) / (2 * a);
+		cout << "Die quadratische Gleichung hat zwei komplexe Lˆsungen:" << endl;
+		cout << "x1 = " << realPart << " + " << imaginaryPart << "i" << endl;
+		cout << "x2 = " << realPart << " - " << imaginaryPart << "i" << endl;
 	}
 }
 
 
 int main()
 {
-	bool t = false;
-	bool q = false;
-	double i1, i2;
-	
-	const double PI = 3.1415928;
-	cout << "Mˆchten Sie trigenometrische Funktionen lˆsen? " << endl;
-	cin >> t;
-	if (t ==  true)
+	int rechenart;
+	cout << floorf(100 * cos(2)) / 100 << endl;
+	cout << "Bitte w‰hlen Sie die gew¸nschte Rechenart: " << endl;
+	cout << "1. Taschenrechner" << endl;
+	cout << "2. Trigenometrie" << endl;
+	cout << "3. Quadratische Funktionen" << endl;
+	cin >> rechenart;
+	if (rechenart == 1)
 	{
-		double t1;
-		cout << "Bitte geben Sie den Winkel in Grad ein: ";
-		cin >> t1;
-
-		// Umwandlung von Grad in Bogenmaﬂ
-		double bogenmass = t1 * PI / 180.0;
-
-		double sinus = sin(bogenmass);
-		double kosinus = cos(bogenmass);
-		double tangens = tan(bogenmass);
-
-		double asinus = asin(sin(bogenmass));
-		double akosinus = acos(cos(bogenmass));
-		double atangens = atan(atan(bogenmass));
-
-		cout << "Sinus: " << sinus << endl;
-		cout << "Kosinus: " << kosinus << endl;
-		cout << "Tangens: " << tangens << endl;
-		cout << "aSinus: " << asinus << endl;
-		cout << "aKosinus: " << akosinus << endl;
-		cout << "aTangens: " << atangens << endl;
-	}
-	else
-	{
-
-
-		cout << "Mˆchten Sie quadratische Funktionen lˆsen? " << endl;
-		cin >> q;
-	
-	if (q == true)
-	{
-		double q1, q2, q3;
-		cout << "Geben Sie die Koeffizienten der quadratischen Gleichung ein: " << endl;
-		cout << "a: " << endl;
-		cin >> q1;
-		cout << "b: " << endl;
-		cin >> q2;
-		cout << "c: " << endl;
-		cin >> q3;
-		solveQ(q1, q2, q3);	
-	} 
-	else if (t == false && q == false)
-	{
+		double i1, i2, ergebnis;
 		char i3;
 		bool validOperator = false;
 		cout << "Bitte geben Sie die erste Zahl ein: " << endl;
 		cin >> i1;
 		cout << "Bitte geben Sie die zweite Zahl ein: " << endl;
 		cin >> i2;
-		cout << "W‰hlen Sie die gew¸nschten mathematischen Operator aus :" << endl << "+ addieren" << endl << "- subtrahieren" << endl << "* multiplizieren" << endl << "/ dividieren" << endl;
-		do 
+		cout << "W‰hlen Sie die gew¸nschten mathematischen Operator aus :" << endl << "+ f¸r addieren" << endl << "- f¸r subtrahieren" << endl << "* f¸r multiplizieren" << endl << "/ f¸r dividieren" << endl;
+		do
 		{
 			cin >> i3;
 			double ergebnis;
@@ -140,9 +125,28 @@ int main()
 				validOperator = false;
 				break;
 			}
-		}while (!validOperator);
-	} 
-
-	return 0;
-
+		} while (!validOperator);
+	}
+	else if (rechenart == 2)
+	{
+		double winkel;
+		cout << "Bitte geben Sie den Winkel in Grad ein: ";
+		cin >> winkel;
+		trigometrie(winkel);
+	}
+	else if (rechenart == 3)
+	{
+		double q1, q2, q3;
+		cout << "Geben Sie die Koeffizienten der quadratischen Gleichung ein: " << endl;
+		cout << "a: " << endl;
+		cin >> q1;
+		cout << "b: " << endl;
+		cin >> q2;
+		cout << "c: " << endl;
+		cin >> q3;
+		solveQ(q1, q2, q3);
+	}
 }
+
+
+
